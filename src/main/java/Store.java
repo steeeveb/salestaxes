@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 import src.main.java.salestaxes.*;
 
 
-public class ProductRepository implements Repository{
+public class Store implements ProductRepository{
     private TaxRepository taxRepository = new TaxOffice();
 
     public Sellable get(String line) throws ProductNotFound{

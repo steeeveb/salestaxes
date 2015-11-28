@@ -13,18 +13,18 @@ import src.main.java.*;
 import src.main.java.salestaxes.*;
 
 
-public class ProductRepositoryTest {
+public class StoreTest {
     Tax tax = new Tax();
     @Test
     public void getAKnownProduct() throws ProductNotFound {
-        ProductRepository repository = new ProductRepository();
+        Store repository = new Store();
         String description = "book";
         BigDecimal price = new BigDecimal("1.00");
         Sellable product = repository.get(String.format("%s at %.2f", description, price));
         assertThat(product, is(equalTo(new Product(description, price, tax.exemption()))));
     }
     public void getAnUnknownProduct() throws ProductNotFound {
-        ProductRepository repository = new ProductRepository();
+        Store repository = new Store();
         String description = "kindle";
         BigDecimal price = new BigDecimal(1.00);
         Sellable product = repository.get(String.format("%s at %.2f", description, price));

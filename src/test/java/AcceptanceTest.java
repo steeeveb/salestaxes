@@ -15,7 +15,7 @@ import src.main.java.salestaxes.*;
 
 
 public class AcceptanceTest {
-    Application application = new Application(new ProductRepository(), new Paper());
+    Application application = new Application(new Store(), new Paper());
 
     @Test
     public void input1() {

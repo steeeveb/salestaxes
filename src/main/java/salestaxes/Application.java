@@ -6,10 +6,10 @@ import java.math.*;
 
 
 public class Application {
-    private Repository repository;
+    private ProductRepository repository;
     private Display display;
 
-    public Application(Repository repository, Display display){
+    public Application(ProductRepository repository, Display display){
         this.repository = repository;
         this.display = display;
     }
