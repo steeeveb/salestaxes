@@ -59,4 +59,14 @@ public class Product implements TaxableItem{
             price.equals(other.price) &&
             rules.equals(other.rules);
     }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + description.hashCode();
+        result = prime * result + price.hashCode();
+        result = prime * result + rules.hashCode();
+        return result;
+    }
 }
