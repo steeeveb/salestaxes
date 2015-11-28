@@ -45,6 +45,7 @@ public class AcceptanceTest {
         assertThat(application.receipt(input), is(equalTo(givenReceipt)));
     }
 
+    @Ignore
     @Test
     public void input3() {
         String input =
