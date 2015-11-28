@@ -7,4 +7,5 @@ public interface Sellable{
     public BigDecimal salesTaxes();
     public String description();
     public void setTaxes(Set<TaxRule> rules);
+    public boolean imported();
 }

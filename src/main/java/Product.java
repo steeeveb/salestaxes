@@ -37,7 +37,11 @@ public class Product implements Sellable{
     }
 
     public String description(){
-        return description;
+        return description.replace("imported ", "").trim();
+    }
+
+    public boolean imported(){
+        return description.contains("imported");
     }
 
     @Override

@@ -10,13 +10,13 @@ public class TaxOffice implements TaxRepository {
     public TaxOffice(){
         Tax tax = new Tax();
         taxMatches.add(new DescriptionMatch(tax.exemption(), tax.basic(), "book", "chocolate", "pills"));
-        taxMatches.add(new DescriptionMatch(tax.duty(), tax.dutyFree(), "imported"));
+        taxMatches.add(new ImportedMatch(tax.duty(), tax.dutyFree()));
     }
 
-    public Set<TaxRule> taxesFor(String description){
+    public Set<TaxRule> taxesFor(Sellable product){
         Set<TaxRule> rules = new HashSet<>();
         for (Match match: taxMatches){
-            rules.add(match.assignRule(description));
+            rules.add(match.assignRule(product));
         }
         return rules;
     }
@@ -24,8 +24,9 @@ public class TaxOffice implements TaxRepository {
 
 
 interface Match {
-    public TaxRule assignRule(String description);
+    public TaxRule assignRule(Sellable product);
 }
+
 
 class DescriptionMatch implements Match{
     String[] keys;
@@ -38,8 +39,8 @@ class DescriptionMatch implements Match{
         this.otherwise = otherwise;
     }
 
-    public TaxRule assignRule(String description){
-        if (test(description)) return rule;
+    public TaxRule assignRule(Sellable product){
+        if (test(product.description())) return rule;
         return otherwise;
     }
 
@@ -50,5 +51,21 @@ class DescriptionMatch implements Match{
             };
         }
         return false;
+    }
+}
+
+
+class ImportedMatch implements Match{
+    TaxRule rule;
+    TaxRule otherwise;
+
+    public ImportedMatch (TaxRule rule, TaxRule otherwise){
+        this.rule = rule;
+        this.otherwise = otherwise;
+    }
+
+    public TaxRule assignRule(Sellable product){
+        if (product.imported()) return rule;
+        return otherwise;
     }
 }

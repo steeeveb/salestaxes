@@ -24,7 +24,7 @@ public class ApplicationTest {
             "1 book: 12.49\n" +
             "Sales Taxes: 0.00\n" +
             "Total: 12.49";
-        ProductRepository repository = new FakeRepository("1 book", "12.49", tax.exemption());
+        ProductRepository repository = new FakeRepository("book", "12.49", tax.exemption());
         Application application = new Application(repository, new TaxOffice(), new Paper());
         assertThat(application.receipt(input), is(equalTo(givenReceipt)));
     }
@@ -35,7 +35,7 @@ public class ApplicationTest {
             "1 music CD: 11.00\n" +
             "Sales Taxes: 1.00\n" +
             "Total: 11.00";
-        ProductRepository repository = new FakeRepository("1 music CD", "10", tax.basic());
+        ProductRepository repository = new FakeRepository("music CD", "10", tax.basic());
         Application application = new Application(repository, new TaxOffice(), new Paper());
         assertThat(application.receipt(input), is(equalTo(givenReceipt)));
     }
@@ -48,7 +48,7 @@ public class ApplicationTest {
             "1 book: 12.49\n" +
             "Sales Taxes: 0.00\n" +
             "Total: 24.98";
-        ProductRepository repository = new FakeRepository("1 book", "12.49", tax.exemption());
+        ProductRepository repository = new FakeRepository("book", "12.49", tax.exemption());
         Application application = new Application(repository, new TaxOffice(), new Paper());
         assertThat(application.receipt(input), is(equalTo(givenReceipt)));
     }

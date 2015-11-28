@@ -10,6 +10,8 @@ import java.util.regex.Pattern;
 
 
 public class Store implements ProductRepository{
+    String expression = "^([0-9]+) (?<description>.*) at (?<price>[0-9]+\\.[0-9][0-9]).*$";
+
     public Sellable get(String line) throws ProductNotFound{
         Matcher parsedLine = parse(line);
         if (parsedLine == null){
@@ -20,7 +22,6 @@ public class Store implements ProductRepository{
     }
 
     private Matcher parse(String line){
-        String expression = "^(?<description>.*) at (?<price>[0-9]+\\.[0-9][0-9]).*$";
         Pattern pattern = Pattern.compile(expression);
 
         Matcher m = pattern.matcher(line);
