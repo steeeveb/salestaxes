@@ -15,6 +15,9 @@ public class Product implements Sellable{
         this.description = description;
         this.rules = new HashSet<>(Arrays.asList(rules));
     }
+    public void setTaxes(Set<TaxRule> rules){
+        this.rules = rules;
+    }
 
     public BigDecimal total(){
         return price.add(salesTaxes());

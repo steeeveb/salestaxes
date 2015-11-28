@@ -4,13 +4,18 @@ package src.main.java.salestaxes;
 import java.util.*;
 import java.math.*;
 
+import src.main.java.TaxOffice;
 
 public class Application {
-    private ProductRepository repository;
+    private TaxRepository taxRepository;
+    private ProductRepository productRepository;
     private Display display;
 
-    public Application(ProductRepository repository, Display display){
-        this.repository = repository;
+    public Application(ProductRepository productRepository,
+                       TaxRepository taxRepository,
+                       Display display){
+        this.productRepository = productRepository;
+        this.taxRepository = taxRepository;
         this.display = display;
     }
 
@@ -19,7 +24,10 @@ public class Application {
         String[] lines = input.split("\n");
         for (String line : lines){
             try {
-                products.add(repository.get(line));
+                Sellable product = productRepository.get(line);
+                Set<TaxRule> taxes = taxRepository.taxesFor(product.description());
+                product.setTaxes(taxes);
+                products.add(product);
             } catch (ProductNotFound e){}
         };
 
