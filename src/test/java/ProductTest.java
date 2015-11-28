@@ -49,7 +49,7 @@ public class ProductTest {
     @Test
     public void aBoxOfImportedBooksIsABoxOfBooks(){
         Product product = new Product("box of imported books", "1.00");
-        assertThat(product.description(), is(equalTo("box of books")));
+        assertThat(product.name(), is(equalTo("box of books")));
     }
     @Test
     public void aBoxOfImportedBooksIsImported(){

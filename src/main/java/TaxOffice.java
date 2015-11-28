@@ -24,7 +24,7 @@ public class TaxOffice implements TaxRepository {
     }
     private boolean isExempt(Sellable product){
         for (String key: exemptions){
-            if (product.description().contains(key)){
+            if (product.name().contains(key)){
                 return true;
             };
         }

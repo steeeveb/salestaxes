@@ -31,7 +31,7 @@ public class Paper implements Display{
         if (product.imported()){
             result += "imported ";
         }
-        result += String.format("%s: %.2f", product.description(), product.total());
+        result += String.format("%s: %.2f", product.name(), product.total());
         return result;
     }
 }

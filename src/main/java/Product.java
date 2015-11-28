@@ -39,7 +39,7 @@ public class Product implements Sellable{
         return result;
     }
 
-    public String description(){
+    public String name(){
         return description.replace("imported ", "").trim();
     }
 
