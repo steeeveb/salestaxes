@@ -26,8 +26,7 @@ public class Application {
             try {
                 Sellable product = productRepository.get(line);
                 Set<TaxRule> taxes = taxRepository.taxesFor(product);
-                product.setTaxes(taxes);
-                products.add(product);
+                products.add(product.setTaxes(taxes));
             } catch (ProductNotFound e){}
         };
 

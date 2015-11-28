@@ -6,6 +6,7 @@ public interface Sellable{
     public BigDecimal total();
     public BigDecimal salesTaxes();
     public String description();
-    public void setTaxes(Set<TaxRule> rules);
+    public Sellable setTaxes(Set<TaxRule> rules);
+    public Sellable setTaxes(TaxRule... rules);
     public boolean imported();
 }

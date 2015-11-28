@@ -24,25 +24,11 @@ public class ProductTest {
     }
 
     @Test
-    public void aCdHasBasicTaxes() {
-        TaxRule basicTax = tax.basic();
-        Sellable cd = new Product("Cd", "14.99", basicTax);
-        assertThat(cd.total(), is(closeTo(new BigDecimal(16.49), new BigDecimal(0.001))));
-    }
-
-    @Test
-    public void anImportedBookHasDutyTaxes() {
-        TaxRule dutyTax = tax.duty();
-        Sellable cd = new Product("Cd", "10", dutyTax);
-        assertThat(cd.total(), is(closeTo(new BigDecimal(10.50), new BigDecimal(0.001))));
-    }
-
-    @Test
-    public void anImportedCdHasBasicTaxesAndDutyTaxes() {
-        TaxRule basicTax = tax.basic();
-        TaxRule dutyTax = tax.duty();
-        Sellable cd = new Product("Cd", "10", basicTax, dutyTax);
-        assertThat(cd.total(), is(closeTo(new BigDecimal(11.50), new BigDecimal(0.001))));
+    public void theOrderOfTaxesIsNotImportant() {
+        Sellable cd = new Product("Cd", "10");
+        Sellable cd1 = cd.setTaxes(tax.basic(), tax.duty());
+        Sellable cd2 = cd.setTaxes(tax.duty(), tax.basic());
+        assertThat(cd1.total(), is(closeTo(cd2.total(), new BigDecimal(0.001))));
     }
 
     @Test
