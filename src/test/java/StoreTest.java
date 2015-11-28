@@ -14,20 +14,28 @@ import src.main.java.salestaxes.*;
 
 
 public class StoreTest {
-    Tax tax = new Tax();
+    Store store = new Store();
+    BigDecimal price = new BigDecimal("1.00");
+
     @Test
     public void getAKnownProduct() throws ProductNotFound {
-        Store repository = new Store();
         String description = "book";
-        BigDecimal price = new BigDecimal("1.00");
-        Sellable product = repository.get(String.format("%s at %.2f", description, price));
-        assertThat(product, is(equalTo(new Product(description, price, tax.exemption()))));
+        String line = String.format("%s at %.2f", description, price);
+        Sellable product = store.get(line);
+        assertThat(product, is(equalTo(new Product(description, price))));
     }
+    @Test
     public void getAnUnknownProduct() throws ProductNotFound {
-        Store repository = new Store();
         String description = "kindle";
-        BigDecimal price = new BigDecimal(1.00);
-        Sellable product = repository.get(String.format("%s at %.2f", description, price));
-        assertThat(product, is(equalTo(new Product(description, price, tax.basic()))));
+        String line = String.format("%s at %.2f", description, price);
+        Sellable product = store.get(line);
+        assertThat(product, is(equalTo(new Product(description, price))));
+    }
+    @Test(expected=ProductNotFound.class)
+    public void sendABadDescription() throws ProductNotFound {
+        String description = "kindle";
+        String line = String.format("%s %.2f", description, price);
+        Sellable product = store.get(line);
+        assertThat(product, is(equalTo(new Product(description, price))));
     }
 }
