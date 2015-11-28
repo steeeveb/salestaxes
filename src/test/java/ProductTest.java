@@ -14,13 +14,12 @@ import src.main.java.salestaxes.*;
 
 
 public class ProductTest {
-    Tax tax = new Tax();
+    TaxFactory tax = new TaxFactory();
 
     @Test
     public void aBookHasNoTaxes() {
         String price = "12.49";
-        TaxRule taxExemption = tax.exemption();
-        Sellable book = new Product("book", price, taxExemption);
+        Sellable book = new Product("book", price);
         assertThat(book.total(), is(closeTo(new BigDecimal(price), new BigDecimal(0.001))));
     }
 
@@ -50,14 +49,14 @@ public class ProductTest {
     public void aBookIsEqualToABook(){
         String description = "book";
         String price = "12.49";
-        Sellable book1 = new Product(description, price, tax.exemption());
-        Sellable book2 = new Product(description, price, tax.exemption());
+        Sellable book1 = new Product(description, price);
+        Sellable book2 = new Product(description, price);
         assertThat(book1, is(equalTo(book2)));
     }
     @Test
     public void aChocolateBarIsNotEqualToABook(){
-        Sellable book1 = new Product("book", "12.49", tax.exemption());
-        Sellable book2 = new Product("chocolate bar", "12.49", tax.exemption());
+        Sellable book1 = new Product("book", "12.49");
+        Sellable book2 = new Product("chocolate bar", "12.49");
         assertThat(book1, is(not(equalTo(book2))));
     }
 

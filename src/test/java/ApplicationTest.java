@@ -15,7 +15,7 @@ import src.main.java.salestaxes.*;
 
 
 public class ApplicationTest {
-    Tax tax = new Tax();
+    TaxFactory tax = new TaxFactory();
 
     @Test
     public void test1book() {
@@ -24,7 +24,7 @@ public class ApplicationTest {
             "1 book: 12.49\n" +
             "Sales Taxes: 0.00\n" +
             "Total: 12.49";
-        ProductRepository repository = new FakeRepository("book", "12.49", tax.exemption());
+        ProductRepository repository = new FakeRepository("book", "12.49");
         Application application = new Application(repository, new TaxOffice(), new Paper());
         assertThat(application.receipt(input), is(equalTo(givenReceipt)));
     }
@@ -48,7 +48,7 @@ public class ApplicationTest {
             "1 book: 12.49\n" +
             "Sales Taxes: 0.00\n" +
             "Total: 24.98";
-        ProductRepository repository = new FakeRepository("book", "12.49", tax.exemption());
+        ProductRepository repository = new FakeRepository("book", "12.49");
         Application application = new Application(repository, new TaxOffice(), new Paper());
         assertThat(application.receipt(input), is(equalTo(givenReceipt)));
     }

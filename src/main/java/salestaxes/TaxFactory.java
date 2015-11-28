@@ -1,17 +1,11 @@
 package src.main.java.salestaxes;
 
 
-public class Tax {
+public class TaxFactory {
     RoundingPolicy policy;
 
-    public Tax(){
+    public TaxFactory(){
         this.policy = new RoundTo(0.05);
-    }
-    public TaxRule dutyFree(){
-        return new PercentageTax(0, policy);
-    }
-    public TaxRule exemption(){
-        return new PercentageTax(0, policy);
     }
     public TaxRule basic(){
         return new PercentageTax(10, policy);

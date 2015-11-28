@@ -5,7 +5,7 @@ import java.util.*;
 import src.main.java.salestaxes.*;
 
 public class TaxOffice implements TaxRepository {
-    private Tax tax = new Tax();
+    private TaxFactory tax = new TaxFactory();
     private String[] exemptions = {"book", "chocolate", "pills"};
 
     public Set<TaxRule> taxesFor(Sellable product){
