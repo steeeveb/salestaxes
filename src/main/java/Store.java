@@ -16,7 +16,7 @@ public class Store implements ProductRepository{
             throw new ProductNotFound();
         }
         return new Product(parsedLine.group("description"),
-                           new BigDecimal(parsedLine.group("price")));
+                           parsedLine.group("price"));
     }
 
     private Matcher parse(String line){

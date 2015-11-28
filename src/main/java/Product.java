@@ -10,6 +10,11 @@ public class Product implements Sellable{
     private String description;
     private Set<TaxRule> rules;
 
+    public Product(String description, String price, TaxRule... rules){
+        this.price = new BigDecimal(price);
+        this.description = description;
+        this.rules = new HashSet<>(Arrays.asList(rules));
+    }
     public Product(String description, BigDecimal price, TaxRule... rules){
         this.price = price;
         this.description = description;
