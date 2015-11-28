@@ -19,24 +19,24 @@ public class TaxOfficeTest {
 
     @Test
     public void getTaxFactoryesForABook() {
-        Sellable product = new Product("book", "1.00");
+        TaxableItem product = new Product("book", "1.00");
         assertThat(taxOffice.taxesFor(product), is(empty()));
     }
     @Test
     public void getTaxFactoryesForACD() {
-        Sellable product = new Product("cd", "1.00");
+        TaxableItem product = new Product("cd", "1.00");
         assertThat(taxOffice.taxesFor(product),
                    is(equalTo(taxes(tax.basic()))));
     }
     @Test
     public void getTaxFactoryesForAnImportedBook() {
-        Sellable product = new Product("imported book", "1.00");
+        TaxableItem product = new Product("imported book", "1.00");
         assertThat(taxOffice.taxesFor(product),
                    is(equalTo(taxes(tax.duty()))));
     }
     @Test
     public void getTaxFactoryesForAnImportedCD() {
-        Sellable product = new Product("imported cd", "1.00");
+        TaxableItem product = new Product("imported cd", "1.00");
         assertThat(taxOffice.taxesFor(product),
                    is(equalTo(taxes(tax.basic(), tax.duty()))));
     }

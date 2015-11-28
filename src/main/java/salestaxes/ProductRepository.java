@@ -4,5 +4,5 @@ import java.math.BigDecimal;
 
 
 public interface ProductRepository{
-    public Sellable get(String line) throws ProductNotFound;
+    public TaxableItem get(String line) throws ProductNotFound;
 }

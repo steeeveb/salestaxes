@@ -6,7 +6,7 @@ import src.main.java.salestaxes.*;
 
 
 public class Paper implements Display{
-    public String format(Receipt receipt, List<Sellable> products){
+    public String format(Receipt receipt, List<TaxableItem> products){
         return body(products) + footer(receipt);
     }
 
@@ -18,15 +18,15 @@ public class Paper implements Display{
         return footer;
     }
 
-    private String body(List<Sellable> products){
+    private String body(List<TaxableItem> products){
         String body = "";
-        for (Sellable product: products){
+        for (TaxableItem product: products){
             body += line(product) + "\n";
         };
         return body;
     }
 
-    private String line(Sellable product){
+    private String line(TaxableItem product){
         String result = "1 ";
         if (product.imported()){
             result += "imported ";

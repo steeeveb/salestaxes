@@ -5,7 +5,7 @@ import java.util.*;
 import src.main.java.salestaxes.*;
 
 
-public class Product implements Sellable{
+public class Product implements TaxableItem{
     private BigDecimal price;
     private String description;
     private Set<TaxRule> rules;
@@ -20,10 +20,10 @@ public class Product implements Sellable{
         this.description = description;
         this.rules = new HashSet<>(Arrays.asList(rules));
     }
-    public Sellable setTaxes(Set<TaxRule> rules){
+    public TaxableItem setTaxes(Set<TaxRule> rules){
         return new Product(description, price, rules.toArray(new TaxRule[rules.size()]));
     }
-    public Sellable setTaxes(TaxRule... rules){
+    public TaxableItem setTaxes(TaxRule... rules){
         return new Product(description, price, rules);
     }
 

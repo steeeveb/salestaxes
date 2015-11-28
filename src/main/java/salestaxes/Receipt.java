@@ -4,15 +4,15 @@ import java.util.*;
 
 
 public class Receipt{
-    private List<Sellable> products;
+    private List<TaxableItem> products;
 
-    public Receipt(List<Sellable> products){
+    public Receipt(List<TaxableItem> products){
         this.products = products;
     }
 
     public BigDecimal salesTaxes(){
         BigDecimal result = new BigDecimal(0);
-        for (Sellable product: products){
+        for (TaxableItem product: products){
             result = result.add(product.salesTaxes());
         }
         return result;
@@ -20,7 +20,7 @@ public class Receipt{
 
     public BigDecimal total(){
         BigDecimal result = new BigDecimal(0);
-        for (Sellable product: products){
+        for (TaxableItem product: products){
             result = result.add(product.total());
         }
         return result;

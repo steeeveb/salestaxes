@@ -8,7 +8,7 @@ public class TaxOffice implements TaxRepository {
     private TaxFactory tax = new TaxFactory();
     private String[] exemptions = {"book", "chocolate", "pills"};
 
-    public Set<TaxRule> taxesFor(Sellable product){
+    public Set<TaxRule> taxesFor(TaxableItem product){
         Set<TaxRule> rules = new HashSet<>();
         if (isNotExempt(product)){
             rules.add(tax.basic());
@@ -19,10 +19,10 @@ public class TaxOffice implements TaxRepository {
         return rules;
     }
 
-    private boolean isNotExempt(Sellable product){
+    private boolean isNotExempt(TaxableItem product){
         return !isExempt(product);
     }
-    private boolean isExempt(Sellable product){
+    private boolean isExempt(TaxableItem product){
         for (String key: exemptions){
             if (product.name().contains(key)){
                 return true;

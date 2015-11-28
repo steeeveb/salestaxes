@@ -55,13 +55,13 @@ public class ApplicationTest {
 }
 
 class FakeRepository implements ProductRepository {
-    private  Sellable product;
+    private  TaxableItem product;
 
     public FakeRepository(String description , String price, TaxRule... rules){
         this.product = new Product(description, new BigDecimal(price), rules);
     }
 
-    public Sellable get(String line) throws ProductNotFound{
+    public TaxableItem get(String line) throws ProductNotFound{
         return product;
     }
 

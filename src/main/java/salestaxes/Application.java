@@ -20,11 +20,11 @@ public class Application {
     }
 
     public String receipt(String input){
-        List<Sellable> products = new ArrayList<>();
+        List<TaxableItem> products = new ArrayList<>();
         String[] lines = input.split("\n");
         for (String line : lines){
             try {
-                Sellable product = productRepository.get(line);
+                TaxableItem product = productRepository.get(line);
                 Set<TaxRule> taxes = taxRepository.taxesFor(product);
                 products.add(product.setTaxes(taxes));
             } catch (ProductNotFound e){}

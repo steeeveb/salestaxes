@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 public class Store implements ProductRepository{
     String expression = "^([0-9]+) (?<description>.*) at (?<price>[0-9]+\\.[0-9][0-9]).*$";
 
-    public Sellable get(String line) throws ProductNotFound{
+    public TaxableItem get(String line) throws ProductNotFound{
         Matcher parsedLine = parse(line);
         if (parsedLine == null){
             throw new ProductNotFound();

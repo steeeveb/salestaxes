@@ -21,21 +21,21 @@ public class StoreTest {
     public void getAKnownProduct() throws ProductNotFound {
         String description = "book";
         String line = String.format("1 %s at %.2f", description, price);
-        Sellable product = store.get(line);
+        TaxableItem product = store.get(line);
         assertThat(product, is(equalTo(new Product(description, price))));
     }
     @Test
     public void getAnUnknownProduct() throws ProductNotFound {
         String description = "kindle";
         String line = String.format("1 %s at %.2f", description, price);
-        Sellable product = store.get(line);
+        TaxableItem product = store.get(line);
         assertThat(product, is(equalTo(new Product(description, price))));
     }
     @Test(expected=ProductNotFound.class)
     public void sendABadDescription() throws ProductNotFound {
         String description = "kindle";
         String line = String.format("1 %s %.2f", description, price);
-        Sellable product = store.get(line);
+        TaxableItem product = store.get(line);
         assertThat(product, is(equalTo(new Product(description, price))));
     }
 }
