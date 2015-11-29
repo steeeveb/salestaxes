@@ -3,10 +3,8 @@ import java.math.BigDecimal;
 import java.util.Set;
 
 public interface TaxableItem{
-    public BigDecimal total();
-    public BigDecimal salesTaxes();
+    public BigDecimal total(Set<TaxRule> rules);
+    public BigDecimal salesTaxes(Set<TaxRule> rules);
     public String name();
-    public TaxableItem setTaxes(Set<TaxRule> rules);
-    public TaxableItem setTaxes(TaxRule... rules);
     public boolean imported();
 }

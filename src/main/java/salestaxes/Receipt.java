@@ -3,30 +3,55 @@ import java.math.*;
 import java.util.*;
 
 
-public class Receipt{
-    private List<TaxableItem> products;
+import src.main.java.salestaxes.*;
 
-    public Receipt(List<TaxableItem> products){
-        this.products = products;
+
+public class Receipt{
+    private List<Line> lines = new ArrayList<>();
+
+    private class Line{
+        private final TaxableItem product;
+        private final Set<TaxRule> taxes;
+
+        public Line(TaxableItem product, Set<TaxRule> taxes){
+            this.product = product;
+            this.taxes = taxes;
+        }
+
+        private BigDecimal salesTaxes(){
+            return product.salesTaxes(taxes);
+        }
+
+        private BigDecimal total(){
+            return product.total(taxes);
+        }
     }
 
     public BigDecimal salesTaxes(){
         BigDecimal result = new BigDecimal(0);
-        for (TaxableItem product: products){
-            result = result.add(product.salesTaxes());
+        for (Line line: lines){
+            result = result.add(line.salesTaxes());
         }
         return result;
     }
 
     public BigDecimal total(){
         BigDecimal result = new BigDecimal(0);
-        for (TaxableItem product: products){
-            result = result.add(product.total());
+        for (Line line: lines){
+            result = result.add(line.total());
         }
         return result;
     }
 
-    public String format(Display display){
-        return display.format(this, products);
+    public void add(TaxableItem product, Set<TaxRule> taxes){
+        lines.add(new Line(product, taxes));
+    }
+
+    public String print(Display display){
+        for (Line line : lines){
+            display.addLine(line.product, line.total());
+        }
+        return display.print(salesTaxes(), total());
     }
 }
+

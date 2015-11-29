@@ -20,16 +20,19 @@ public class Application {
     }
 
     public String receipt(String input){
-        List<TaxableItem> products = new ArrayList<>();
         String[] lines = input.split("\n");
+        Receipt receipt = new Receipt();
         for (String line : lines){
+            TaxableItem product;
             try {
-                TaxableItem product = productRepository.get(line);
-                Set<TaxRule> taxes = taxRepository.taxesFor(product);
-                products.add(product.setTaxes(taxes));
-            } catch (ProductNotFound e){}
+                product = productRepository.get(line);
+            } catch (ProductNotFound e){
+                continue;
+            }
+            Set<TaxRule> taxes = taxRepository.taxesFor(product);
+            receipt.add(product, taxes);
         };
 
-        return new Receipt(products).format(display);
+        return receipt.print(display);
     }
 }

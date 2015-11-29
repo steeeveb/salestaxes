@@ -1,7 +1,8 @@
 package src.main.java.salestaxes;
 
-import java.util.*;
+import java.math.*;
 
 public interface Display{
-    public String format(Receipt receipt, List<TaxableItem> products);
+    public String print(BigDecimal salesTaxes, BigDecimal total);
+    public void addLine(TaxableItem product, BigDecimal total);
 }

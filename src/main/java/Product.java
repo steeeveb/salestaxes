@@ -20,18 +20,12 @@ public class Product implements TaxableItem{
         this.description = description;
         this.rules = new HashSet<>(Arrays.asList(rules));
     }
-    public TaxableItem setTaxes(Set<TaxRule> rules){
-        return new Product(description, price, rules.toArray(new TaxRule[rules.size()]));
-    }
-    public TaxableItem setTaxes(TaxRule... rules){
-        return new Product(description, price, rules);
+
+    public BigDecimal total(Set<TaxRule> rules){
+        return price.add(salesTaxes(rules));
     }
 
-    public BigDecimal total(){
-        return price.add(salesTaxes());
-    }
-
-    public BigDecimal salesTaxes(){
+    public BigDecimal salesTaxes(Set<TaxRule> rules){
         BigDecimal result = new BigDecimal(0);
         for (TaxRule rule : rules){
             result = result.add(rule.compute(price));

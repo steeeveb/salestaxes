@@ -20,15 +20,14 @@ public class ProductTest {
     public void aBookHasNoTaxes() {
         String price = "12.49";
         TaxableItem book = new Product("book", price);
-        assertThat(book.total(), is(closeTo(new BigDecimal(price), new BigDecimal(0.001))));
+        assertThat(book.total(taxes()), is(closeTo(new BigDecimal(price), new BigDecimal(0.001))));
     }
 
     @Test
     public void theOrderOfTaxesIsNotImportant() {
         TaxableItem cd = new Product("Cd", "10");
-        TaxableItem cd1 = cd.setTaxes(tax.basic(), tax.duty());
-        TaxableItem cd2 = cd.setTaxes(tax.duty(), tax.basic());
-        assertThat(cd1.total(), is(closeTo(cd2.total(), new BigDecimal(0.001))));
+        assertThat(cd.total(taxes(tax.basic(), tax.duty())),
+                   is(closeTo(cd.total(taxes(tax.duty(), tax.basic())), new BigDecimal(0.001))));
     }
 
     @Test
@@ -55,5 +54,9 @@ public class ProductTest {
     public void aBoxOfImportedBooksIsImported(){
         Product product = new Product("box of imported books", "1.00");
         assertThat(product.imported(), is(true));
+    }
+
+    private Set<TaxRule> taxes(TaxRule... rules){
+        return new HashSet<>(Arrays.asList(rules));
     }
 }

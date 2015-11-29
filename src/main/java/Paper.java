@@ -2,36 +2,38 @@ package src.main.java;
 
 
 import java.util.*;
+import java.math.*;
 import src.main.java.salestaxes.*;
 
 
 public class Paper implements Display{
-    public String format(Receipt receipt, List<TaxableItem> products){
-        return body(products) + footer(receipt);
+    private List<String> lines = new ArrayList<>();
+
+    public String print(BigDecimal salesTaxes, BigDecimal total){
+        return body() + footer(salesTaxes, total);
     }
 
-    private String footer(Receipt receipt){
+    private String footer(BigDecimal salesTaxes, BigDecimal total){
         String footer = String.format(
-            "Sales Taxes: %.2f\nTotal: %.2f",
-            receipt.salesTaxes(), receipt.total()
+            "Sales Taxes: %.2f\nTotal: %.2f", salesTaxes, total
         );
         return footer;
     }
 
-    private String body(List<TaxableItem> products){
-        String body = "";
-        for (TaxableItem product: products){
-            body += line(product) + "\n";
+    private String body(){
+        String result = "";
+        for ( String line: lines){
+            result += line + "\n";
         };
-        return body;
+        return result;
     }
 
-    private String line(TaxableItem product){
+    public void addLine(TaxableItem product, BigDecimal total){
         String result = "1 ";
         if (product.imported()){
             result += "imported ";
         }
-        result += String.format("%s: %.2f", product.name(), product.total());
-        return result;
+        result += String.format("%s: %.2f", product.name(), total);
+        lines.add(result);
     }
 }
