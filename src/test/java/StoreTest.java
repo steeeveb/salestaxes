@@ -38,4 +38,12 @@ public class StoreTest {
         TaxableItem product = store.get(line);
         assertThat(product, is(equalTo(new Product(description, price))));
     }
+
+    @Test
+    public void aBoxOfImportedBooksIsABoxOfBooks() throws ProductNotFound{
+        String line = "1 box of imported books at 1.00";
+        TaxableItem product = store.get(line);
+        TaxableItem expected = new Product("box of books", "1.00", true);
+        assertThat(product, is(equalTo(expected)));
+    }
 }

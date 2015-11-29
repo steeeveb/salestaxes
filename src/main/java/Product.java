@@ -7,15 +7,28 @@ import src.main.java.salestaxes.*;
 
 public class Product implements TaxableItem{
     private BigDecimal price;
-    private String description;
+    private String name;
+    private final boolean imported;
 
-    public Product(String description, String price){
+    public Product(String name, String price){
         this.price = new BigDecimal(price);
-        this.description = description;
+        this.name = name;
+        this.imported = false;
     }
-    public Product(String description, BigDecimal price){
+    public Product(String name, String price, boolean imported){
+        this.price = new BigDecimal(price);
+        this.name = name;
+        this.imported = imported;
+    }
+    public Product(String name, BigDecimal price){
         this.price = price;
-        this.description = description;
+        this.name = name;
+        this.imported = false;
+    }
+    public Product(String name, BigDecimal price, boolean imported){
+        this.price = price;
+        this.name = name;
+        this.imported = imported;
     }
 
     public BigDecimal total(Set<TaxRule> rules){
@@ -31,11 +44,11 @@ public class Product implements TaxableItem{
     }
 
     public String name(){
-        return description.replace("imported ", "").trim();
+        return name;
     }
 
     public boolean imported(){
-        return description.contains("imported ");
+        return imported;
     }
 
     @Override
@@ -46,15 +59,16 @@ public class Product implements TaxableItem{
 
         Product other = (Product) obj;
         return
-            description.equals(other.description) &&
-            price.equals(other.price);
+            name.equals(other.name) &&
+            price.equals(other.price) &&
+            imported == other.imported;
     }
 
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + description.hashCode();
+        result = prime * result + name.hashCode();
         result = prime * result + price.hashCode();
         return result;
     }

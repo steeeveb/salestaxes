@@ -45,17 +45,6 @@ public class ProductTest {
         assertThat(book1, is(not(equalTo(book2))));
     }
 
-    @Test
-    public void aBoxOfImportedBooksIsABoxOfBooks(){
-        Product product = new Product("box of imported books", "1.00");
-        assertThat(product.name(), is(equalTo("box of books")));
-    }
-    @Test
-    public void aBoxOfImportedBooksIsImported(){
-        Product product = new Product("box of imported books", "1.00");
-        assertThat(product.imported(), is(true));
-    }
-
     private Set<TaxRule> taxes(TaxRule... rules){
         return new HashSet<>(Arrays.asList(rules));
     }

@@ -18,25 +18,25 @@ public class TaxOfficeTest {
     TaxFactory tax = new TaxFactory();
 
     @Test
-    public void getTaxFactoryesForABook() {
+    public void getTaxesForABook() {
         TaxableItem product = new Product("book", "1.00");
         assertThat(taxOffice.taxesFor(product), is(empty()));
     }
     @Test
-    public void getTaxFactoryesForACD() {
+    public void getTaxesForACD() {
         TaxableItem product = new Product("cd", "1.00");
         assertThat(taxOffice.taxesFor(product),
                    is(equalTo(taxes(tax.basic()))));
     }
     @Test
-    public void getTaxFactoryesForAnImportedBook() {
-        TaxableItem product = new Product("imported book", "1.00");
+    public void getTaxesForAnImportedBook() {
+        TaxableItem product = new Product("book", "1.00", true);
         assertThat(taxOffice.taxesFor(product),
                    is(equalTo(taxes(tax.duty()))));
     }
     @Test
-    public void getTaxFactoryesForAnImportedCD() {
-        TaxableItem product = new Product("imported cd", "1.00");
+    public void getTaxesForAnImportedCD() {
+        TaxableItem product = new Product("cd", "1.00", true);
         assertThat(taxOffice.taxesFor(product),
                    is(equalTo(taxes(tax.basic(), tax.duty()))));
     }
@@ -44,4 +44,3 @@ public class TaxOfficeTest {
         return new HashSet<>(Arrays.asList(rules));
     }
 }
-
