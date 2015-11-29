@@ -45,7 +45,7 @@ public class ProductTest {
         assertThat(book1, is(not(equalTo(book2))));
     }
 
-    private Set<TaxRule> taxes(TaxRule... rules){
-        return new HashSet<>(Arrays.asList(rules));
+    private List<TaxRule> taxes(TaxRule... rules){
+        return Arrays.asList(rules);
     }
 }

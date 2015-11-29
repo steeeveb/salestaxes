@@ -36,7 +36,7 @@ public class ReceiptTest {
         assertThat(receipt.total(),
                    is(closeTo(new BigDecimal("10.00"), new BigDecimal(0.001))));
     }
-    private Set<TaxRule> taxes(TaxRule... taxes){
-        return new HashSet<TaxRule>(Arrays.asList(taxes));
+    private List<TaxRule> taxes(TaxRule... taxes){
+        return Arrays.asList(taxes);
     }
 }

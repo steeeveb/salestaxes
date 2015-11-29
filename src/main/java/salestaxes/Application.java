@@ -27,7 +27,7 @@ public class Application {
             } catch (ProductNotFound e){
                 continue;
             }
-            Set<TaxRule> taxes = taxRepository.taxesFor(product);
+            List<TaxRule> taxes = taxRepository.taxesFor(product);
             receipt.add(product, taxes);
         };
 

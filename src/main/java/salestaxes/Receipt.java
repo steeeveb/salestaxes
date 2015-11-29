@@ -25,7 +25,7 @@ public class Receipt{
         return result;
     }
 
-    public void add(TaxableItem product, Set<TaxRule> taxes){
+    public void add(TaxableItem product, List<TaxRule> taxes){
         lines.add(new Line(product, taxes));
     }
 
@@ -38,9 +38,9 @@ public class Receipt{
 
     private class Line{
         private final TaxableItem product;
-        private final Set<TaxRule> taxes;
+        private final List<TaxRule> taxes;
 
-        public Line(TaxableItem product, Set<TaxRule> taxes){
+        public Line(TaxableItem product, List<TaxRule> taxes){
             this.product = product;
             this.taxes = taxes;
         }

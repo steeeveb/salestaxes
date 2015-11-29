@@ -41,7 +41,7 @@ public class TaxOfficeTest {
         assertThat(taxOffice.taxesFor(product),
                    is(equalTo(taxes(tax.basic(), tax.duty()))));
     }
-    private Set<TaxRule> taxes(TaxRule... rules){
-        return new HashSet<>(Arrays.asList(rules));
+    private List<TaxRule> taxes(TaxRule... rules){
+        return Arrays.asList(rules);
     }
 }

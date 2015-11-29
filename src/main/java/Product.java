@@ -16,11 +16,11 @@ public class Product implements TaxableItem{
         this.imported = imported;
     }
 
-    public BigDecimal total(Set<TaxRule> rules){
+    public BigDecimal total(List<TaxRule> rules){
         return price.add(salesTaxes(rules));
     }
 
-    public BigDecimal salesTaxes(Set<TaxRule> rules){
+    public BigDecimal salesTaxes(List<TaxRule> rules){
         BigDecimal result = new BigDecimal(0);
         for (TaxRule rule : rules){
             result = result.add(rule.compute(price));

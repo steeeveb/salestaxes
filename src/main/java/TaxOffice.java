@@ -8,8 +8,8 @@ public class TaxOffice implements TaxRepository {
     private TaxFactory tax = new TaxFactory();
     private String[] exemptions = {"book", "chocolate", "pills"};
 
-    public Set<TaxRule> taxesFor(TaxableItem product){
-        Set<TaxRule> rules = new HashSet<>();
+    public List<TaxRule> taxesFor(TaxableItem product){
+        List<TaxRule> rules = new ArrayList<>();
         if (isNotExempt(product)){
             rules.add(tax.basic());
         }
