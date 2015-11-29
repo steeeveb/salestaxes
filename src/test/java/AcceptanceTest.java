@@ -29,7 +29,7 @@ public class AcceptanceTest {
             "1 chocolate bar: 0.85\n" +
             "Sales Taxes: 1.50\n" +
             "Total: 29.83";
-        assertThat(application.receipt(input), is(equalTo(givenReceipt)));
+        assertThat(application.receipt(new BasketList(input)), is(equalTo(givenReceipt)));
     }
 
     @Test
@@ -42,7 +42,7 @@ public class AcceptanceTest {
             "1 imported bottle of perfume: 54.65\n" +
             "Sales Taxes: 7.65\n" +
             "Total: 65.15";
-        assertThat(application.receipt(input), is(equalTo(givenReceipt)));
+        assertThat(application.receipt(new BasketList(input)), is(equalTo(givenReceipt)));
     }
 
     @Test
@@ -59,7 +59,7 @@ public class AcceptanceTest {
             "1 imported box of chocolates: 11.85\n" +
             "Sales Taxes: 6.70\n" +
             "Total: 74.68";
-        assertThat(application.receipt(input), is(equalTo(givenReceipt)));
+        assertThat(application.receipt(new BasketList(input)), is(equalTo(givenReceipt)));
     }
 
 }

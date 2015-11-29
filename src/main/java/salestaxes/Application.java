@@ -4,7 +4,6 @@ package src.main.java.salestaxes;
 import java.util.*;
 import java.math.*;
 
-import src.main.java.TaxOffice;
 
 public class Application {
     private TaxRepository taxRepository;
@@ -19,10 +18,9 @@ public class Application {
         this.display = display;
     }
 
-    public String receipt(String input){
-        String[] lines = input.split("\n");
+    public String receipt(Basket basket){
         Receipt receipt = new Receipt();
-        for (String line : lines){
+        for (String line : basket.lines()){
             TaxableItem product;
             try {
                 product = productRepository.get(line);
