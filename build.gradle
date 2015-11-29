@@ -42,7 +42,9 @@ test {
 }
 
 jacocoTestReport {
-    sourceDirectories = files("${buildDir}/src/main/java")
+    group = "Reporting"
+    description = "Generate Jacoco coverage reports after running tests."
+    additionalSourceDirs = files(sourceSets.main.allJava.srcDirs)
     reports {
         xml.enabled true
         html.enabled true
