@@ -9,24 +9,6 @@ import src.main.java.salestaxes.*;
 public class Receipt{
     private List<Line> lines = new ArrayList<>();
 
-    private class Line{
-        private final TaxableItem product;
-        private final Set<TaxRule> taxes;
-
-        public Line(TaxableItem product, Set<TaxRule> taxes){
-            this.product = product;
-            this.taxes = taxes;
-        }
-
-        private BigDecimal salesTaxes(){
-            return product.salesTaxes(taxes);
-        }
-
-        private BigDecimal total(){
-            return product.total(taxes);
-        }
-    }
-
     public BigDecimal salesTaxes(){
         BigDecimal result = new BigDecimal(0);
         for (Line line: lines){
@@ -52,6 +34,24 @@ public class Receipt{
             display.addLine(line.product, line.total());
         }
         return display.print(salesTaxes(), total());
+    }
+
+    private class Line{
+        private final TaxableItem product;
+        private final Set<TaxRule> taxes;
+
+        public Line(TaxableItem product, Set<TaxRule> taxes){
+            this.product = product;
+            this.taxes = taxes;
+        }
+
+        private BigDecimal salesTaxes(){
+            return product.salesTaxes(taxes);
+        }
+
+        private BigDecimal total(){
+            return product.total(taxes);
+        }
     }
 }
 

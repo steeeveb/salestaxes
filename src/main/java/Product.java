@@ -8,17 +8,14 @@ import src.main.java.salestaxes.*;
 public class Product implements TaxableItem{
     private BigDecimal price;
     private String description;
-    private Set<TaxRule> rules;
 
-    public Product(String description, String price, TaxRule... rules){
+    public Product(String description, String price){
         this.price = new BigDecimal(price);
         this.description = description;
-        this.rules = new HashSet<>(Arrays.asList(rules));
     }
-    public Product(String description, BigDecimal price, TaxRule... rules){
+    public Product(String description, BigDecimal price){
         this.price = price;
         this.description = description;
-        this.rules = new HashSet<>(Arrays.asList(rules));
     }
 
     public BigDecimal total(Set<TaxRule> rules){
@@ -38,7 +35,7 @@ public class Product implements TaxableItem{
     }
 
     public boolean imported(){
-        return description.contains("imported");
+        return description.contains("imported ");
     }
 
     @Override
@@ -50,8 +47,7 @@ public class Product implements TaxableItem{
         Product other = (Product) obj;
         return
             description.equals(other.description) &&
-            price.equals(other.price) &&
-            rules.equals(other.rules);
+            price.equals(other.price);
     }
 
     @Override
@@ -60,7 +56,6 @@ public class Product implements TaxableItem{
         int result = 1;
         result = prime * result + description.hashCode();
         result = prime * result + price.hashCode();
-        result = prime * result + rules.hashCode();
         return result;
     }
 }
