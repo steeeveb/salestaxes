@@ -10,21 +10,6 @@ public class Product implements TaxableItem{
     private String name;
     private final boolean imported;
 
-    public Product(String name, String price){
-        this.price = new BigDecimal(price);
-        this.name = name;
-        this.imported = false;
-    }
-    public Product(String name, String price, boolean imported){
-        this.price = new BigDecimal(price);
-        this.name = name;
-        this.imported = imported;
-    }
-    public Product(String name, BigDecimal price){
-        this.price = price;
-        this.name = name;
-        this.imported = false;
-    }
     public Product(String name, BigDecimal price, boolean imported){
         this.price = price;
         this.name = name;

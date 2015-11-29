@@ -15,6 +15,8 @@ import src.main.java.salestaxes.*;
 
 
 public class PaperTest {
+    ProductBuilder aProduct = new ProductBuilder();
+
     @Test
     public void testFooter() {
         String input = "";
@@ -33,7 +35,7 @@ public class PaperTest {
             "1 music CD: 11.00\n" +
             "Sales Taxes: 1.00\n" +
             "Total: 11.00";
-        TaxableItem product = new Product("music CD", new BigDecimal("10"));
+        TaxableItem product = aProduct.called("music CD").priced("10").build();
         Display paper = new Paper();
         paper.addLine(product, new BigDecimal(11));
         String receipt = paper.print(new BigDecimal(1), new BigDecimal(11));
@@ -47,7 +49,7 @@ public class PaperTest {
             "1 imported music CD: 11.00\n" +
             "Sales Taxes: 1.00\n" +
             "Total: 11.00";
-        TaxableItem product = new Product("imported music CD", new BigDecimal("10"));
+        TaxableItem product = aProduct.called("music CD").priced("10").imported().build();
         Display paper = new Paper();
         paper.addLine(product, new BigDecimal(11));
         String receipt = paper.print(new BigDecimal(1), new BigDecimal(11));

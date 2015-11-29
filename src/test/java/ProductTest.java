@@ -15,33 +15,33 @@ import src.main.java.salestaxes.*;
 
 public class ProductTest {
     TaxFactory tax = new TaxFactory();
+    ProductBuilder aProduct = new ProductBuilder();
 
     @Test
     public void aBookHasNoTaxes() {
-        String price = "12.49";
-        TaxableItem book = new Product("book", price);
-        assertThat(book.total(taxes()), is(closeTo(new BigDecimal(price), new BigDecimal(0.001))));
+        BigDecimal price = new BigDecimal("12.49");
+        TaxableItem book = aProduct.called("book").priced(price).build();
+        assertThat(book.total(taxes()), is(closeTo(price, new BigDecimal(0.001))));
     }
 
     @Test
     public void theOrderOfTaxesIsNotImportant() {
-        TaxableItem cd = new Product("Cd", "10");
+        TaxableItem cd = aProduct.called("cd").priced("10").build();
         assertThat(cd.total(taxes(tax.basic(), tax.duty())),
                    is(closeTo(cd.total(taxes(tax.duty(), tax.basic())), new BigDecimal(0.001))));
     }
 
     @Test
     public void aBookIsEqualToABook(){
-        String description = "book";
-        String price = "12.49";
-        TaxableItem book1 = new Product(description, price);
-        TaxableItem book2 = new Product(description, price);
+        ProductBuilder copy = aProduct.called("book").priced("10");
+        TaxableItem book1 = copy.build();
+        TaxableItem book2 = copy.build();
         assertThat(book1, is(equalTo(book2)));
     }
     @Test
     public void aChocolateBarIsNotEqualToABook(){
-        TaxableItem book1 = new Product("book", "12.49");
-        TaxableItem book2 = new Product("chocolate bar", "12.49");
+        TaxableItem book1 = aProduct.called("book").priced("12.49").build();
+        TaxableItem book2 = aProduct.called("chocolate bar").priced("12.49").build();
         assertThat(book1, is(not(equalTo(book2))));
     }
 

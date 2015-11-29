@@ -16,34 +16,32 @@ import src.main.java.salestaxes.*;
 public class StoreTest {
     Store store = new Store();
     BigDecimal price = new BigDecimal("1.00");
+    ProductBuilder aProduct = new ProductBuilder();
 
     @Test
     public void getAKnownProduct() throws ProductNotFound {
-        String description = "book";
-        String line = String.format("1 %s at %.2f", description, price);
-        TaxableItem product = store.get(line);
-        assertThat(product, is(equalTo(new Product(description, price))));
+        TaxableItem product = store.get("1 book at 1.00");
+        TaxableItem expected = aProduct.called("book").priced("1.00").build();
+        assertThat(product, is(equalTo(expected)));
     }
     @Test
     public void getAnUnknownProduct() throws ProductNotFound {
-        String description = "kindle";
-        String line = String.format("1 %s at %.2f", description, price);
-        TaxableItem product = store.get(line);
-        assertThat(product, is(equalTo(new Product(description, price))));
+        TaxableItem product = store.get("1 kindle at 1.00");
+        TaxableItem expected = aProduct.called("kindle").priced("1.00").build();
+        assertThat(product, is(equalTo(expected)));
     }
     @Test(expected=ProductNotFound.class)
     public void sendABadDescription() throws ProductNotFound {
-        String description = "kindle";
-        String line = String.format("1 %s %.2f", description, price);
+        String line = "1 kindle 1.00";
         TaxableItem product = store.get(line);
-        assertThat(product, is(equalTo(new Product(description, price))));
     }
 
     @Test
     public void aBoxOfImportedBooksIsABoxOfBooks() throws ProductNotFound{
         String line = "1 box of imported books at 1.00";
         TaxableItem product = store.get(line);
-        TaxableItem expected = new Product("box of books", "1.00", true);
+        TaxableItem expected = aProduct.called("box of books")
+                                       .priced("1.00").imported().build();
         assertThat(product, is(equalTo(expected)));
     }
 }
